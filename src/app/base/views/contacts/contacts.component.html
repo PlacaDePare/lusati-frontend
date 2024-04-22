@@ -1,0 +1,159 @@
+<app-page-title
+  [filter]="true"
+  [create]="true"
+  [title]="'Gerenciamento de contatos'"
+  [description]="
+    'Explore e gerencie facilmente todos os contatos do sistema neste painel dedicado. Tenha controle total sobre seus contatos, permitindo adicionar, editar ou excluir informações com simplicidade e eficiência.'
+  "
+  (handleFilter)="filterOn = true"
+  (handleCreate)="openModal()"
+></app-page-title>
+<div class="page-content">
+  <div class="totals">
+    <div class="total-card">
+      <i class="bi bi-person-lines-fill"></i>
+      <div>
+        <span>{{ totals.total }}</span>
+        <p>Total</p>
+      </div>
+    </div>
+    <div class="total-card green">
+      <i class="bi bi-person-check-fill"></i>
+      <div>
+        <span>{{ totals.active }}</span>
+        <p>Ativos</p>
+      </div>
+    </div>
+    <div class="total-card red">
+      <i class="bi bi-person-fill-x"></i>
+      <div>
+        <span>{{ totals.inactive }}</span>
+        <p>Inativos</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center" (click)="setOrder('id')">
+            Código
+            <i
+              *ngIf="order === 'id'"
+              class="bi bi-arrow-down"
+              [ngClass]="{ revert: orderDirection === 'asc' }"
+            ></i>
+          </th>
+          <th (click)="setOrder('ds_contato')">
+            Nome
+            <i
+              *ngIf="order === 'ds_contato'"
+              class="bi bi-arrow-down"
+              [ngClass]="{ revert: orderDirection === 'asc' }"
+            ></i>
+          </th>
+          <th (click)="setOrder('ds_email')">
+            E-mail
+            <i
+              *ngIf="order === 'ds_email'"
+              class="bi bi-arrow-down"
+              [ngClass]="{ revert: orderDirection === 'asc' }"
+            ></i>
+          </th>
+          <th (click)="setOrder('nr_celular')">
+            Celular
+            <i
+              *ngIf="order === 'nr_celular'"
+              class="bi bi-arrow-down"
+              [ngClass]="{ revert: orderDirection === 'asc' }"
+            ></i>
+          </th>
+          <th (click)="setOrder('st_ativo')">
+            Status<i
+              *ngIf="order === 'st_ativo'"
+              class="bi bi-arrow-down"
+              [ngClass]="{ revert: orderDirection === 'asc' }"
+            ></i>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let value of tableData">
+          <tr>
+            <td class="text-center">{{ value.id }}</td>
+            <td>{{ value.dsContato }}</td>
+            <td>{{ value.dsEmail }}</td>
+            <td>{{ value.nrCelular }}</td>
+            <td>
+              <span
+                class="table-badge"
+                [ngClass]="{ sucess: value.stAtivo, error: !value.stAtivo }"
+              >
+                {{ value.stAtivo ? "Ativo" : "Inativo" }}
+              </span>
+            </td>
+            <td>
+              <div ngbDropdown class="d-inline-block">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  id="dropdownBasic1"
+                  ngbDropdownToggle
+                >
+                  <i class="bi bi-list"></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button ngbDropdownItem (click)="openModal(value)">
+                    <i class="bi bi-pencil"></i> Editar
+                  </button>
+                  <button ngbDropdownItem (click)="deleteItem(value)">
+                    <i class="bi bi-trash"></i> Deletar
+                  </button>
+                  <button ngbDropdownItem (click)="activeItem(value)">
+                    <i
+                      class="bi"
+                      [ngClass]="value.stAtivo ? 'bi-x ' : 'bi-check'"
+                    ></i>
+                    {{ value.stAtivo ? "Desativar" : "Ativar" }}
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <div
+      id="pagination"
+      class="d-flex justify-content-end align-items-center w-100"
+    >
+      <div class="quantity">
+        <span>Total de registros: {{ this.total }}</span>
+      </div>
+      <div class="pagination-selector">
+        <select class="form-select" [(ngModel)]="pageSize" (change)="search()">
+          <ng-container *ngFor="let item of pageSizeSelector">
+            <option [value]="item.value">{{ item.text }}</option>
+          </ng-container>
+        </select>
+        <ngb-pagination
+          class="d-flex justify-content-end"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          [maxSize]="5"
+          [rotate]="true"
+          [collectionSize]="total"
+          (pageChange)="search()"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-contacts-filter-modal
+  [filterOn]="filterOn"
+  (close)="filterOn = false"
+  (filterHandler)="filterChange($event)"
+></app-contacts-filter-modal>

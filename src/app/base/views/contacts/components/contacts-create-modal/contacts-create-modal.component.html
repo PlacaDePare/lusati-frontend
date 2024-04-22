@@ -1,0 +1,72 @@
+<div class="modal-header">
+  {{ operation }} Contato
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.close('Cross click')"
+  >
+    <i class="bi bi-x"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Contato</a>
+      <ng-template ngbNavContent>
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-12 col-md-4">
+              <label class="form-label"> Nome completo*</label>
+              <input
+                class="form-control"
+                formControlName="dsContato"
+                [ngClass]="formValidator.displayFieldCss('dsContato', form)"
+              />
+            </div>
+            <div class="col-12 col-md-4">
+              <label class="form-label"> E-mail*</label>
+              <input
+                class="form-control"
+                formControlName="dsEmail"
+                [ngClass]="formValidator.displayFieldCss('dsEmail', form)"
+              />
+            </div>
+            <div class="col-12 col-md-4">
+              <label class="form-label"> Telefone*</label>
+              <input
+                class="form-control"
+                formControlName="nrCelular"
+                [mask]="phoneMask"
+                [ngClass]="formValidator.displayFieldCss('nrCelular', form)"
+              />
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" [disabled]="operation === 'Register'">
+      <a ngbNavLink>Grupos</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <ng-container *ngFor="let item of groups">
+            <div class="col-md-4 mt-4">
+              <div class="group-card" [ngClass]="{ active: item.active }" (click)="item.active = !item.active">
+                <div class="square-icon">
+                  <i class="bi bi-check"></i>
+                </div>
+                <span>{{ item.dsGrupocontato }}</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" style="width: 20%" (click)="save()">
+    Salvar
+  </button>
+</div>

@@ -1,0 +1,26 @@
+<div class="filter-side shadow" *ngIf="filterOn" [@inOutAnimation]>
+  <div class="filter-side-title">
+    <span>Filtros</span>
+    <button  (click)="closeFilter()"><i class="bi bi-x"></i></button>
+  </div>
+  <form [formGroup]="filterForm">
+    <div class="mt-2">
+      <label class="form-label"> Nome </label>
+      <input class="form-control" formControlName="name" />
+    </div>
+    <div class="mt-2">
+      <label class="form-label"> Status </label>
+      <select class="form-select" formControlName="status">
+        <option [value]="null">Ambos</option>
+        <option [value]="1">Ativo</option>
+        <option [value]="0">Inativo</option></select
+      >
+    </div>
+    <hr />
+    <button class="btn btn-primary w-100" (click)="emmitFilter()">
+      Aplicar
+    </button>
+    <hr/>
+    <button class="btn btn-secondary w-100 mt-2" (click)="resetFilter()">Limpar</button>
+  </form>
+</div>

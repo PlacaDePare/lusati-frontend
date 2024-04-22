@@ -1,0 +1,189 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+@import 'assets/scss/table.scss';
+@import 'assets/scss/forms.scss';
+@import 'assets/scss/toastr.scss';
+
+:root {
+  --primary-color: #017dfc;
+  --primary-color-ascent: #F6E8E9;
+  --primary-color-opacity: rgba(1, 125, 252, 0.3);
+  --primary-color-ascent-scroll-iframe: #d0d1d4;
+  --secondary-color: #6c757d;
+  --secondary-color-opacity: #6c757dff --gray-1: #676D85; //btn light
+  --gray-2: #5d5f6b; //texto
+  --gray-3: #323647; //titulo
+  --gray-7: #D7D9E0; //border
+  --gray-8: #dee2e6; //input-border
+
+  --clear-2: #F54A45;
+  --clear-4: #efefef; //background-geral
+  --clear-5: #F9FAFC; //background-modal card
+  --clear-6: var(--clear-4); // background-modal card search
+  --clear-7: var(--clear-5); //background input search
+
+  --btn-purple-500: #6f42c1;
+  --btn-purple-600: #59359a;
+  --btn-pink-500: #d63384;
+  --btn-pink-600: #ab296a;
+  --btn-blue-500: #0d6efd;
+  --btn-blue-600: #0a58ca;
+  --btn-indigo-500: #6610f2;
+  --btn-indigo-600: #520dc2;
+
+  --user-blue: #425DCD;
+  --user-red: #C23A3A;
+  --user-green: #31A366;
+  --user-pink: #CE47D1;
+  --user-aqua: #289985;
+  --user-yellow: #E08D40;
+
+  --background-modal: rgba(4, 5, 11, 0.6);
+  --shadow: 0 3px 5px rgba(0, 0, 0, 0.01), 0 0 2px rgba(0, 0, 0, 0.025), 0 1px 4px rgba(0, 0, 0, 0.037);
+
+  --mainFont: 'Roboto', sans-serif;
+  --subFont: 'Poppins', sans-serif;
+}
+
+:root .dark-theme {
+  --gray-1: #AEB3C2; // btn light
+  --gray-2: #CDD2DE; // texto
+  --gray-3: #FDFDFD; // titulo
+  --gray-7: #4B4F59; // border
+  --gray-8: #393E46; // input-border
+
+  --clear-2: #FF847C;
+  --clear-4: #20262e; // background-geral
+  --clear-5: #2a323d; // background-modal card
+  --clear-6: var(--clear-5); // background-modal card search
+  --clear-7: var(--clear-4); //background input search
+  --shadow: 0 3px 5px rgba(255, 255, 255, 0.01), 0 0 2px rgba(255, 255, 255, 0.025), 0 1px 4px rgba(255, 255, 255, 0.037);
+}
+
+* {
+  margin: 0;
+  margin-bottom: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  @media(max-width:1080px) {
+    font-size: 93.75%;
+  }
+
+  @media(max-width:720px) {
+    font-size: 87.5%;
+  }
+}
+
+body {
+  //background: var(--gray-7);
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--clear-4);
+  overflow-x: hidden;
+}
+
+body {
+  -webkit-font-smoothing: antialiased; //renderiza subpixel monitores antigos
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--clear-6);
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  background: var(--primary-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 16px;
+  background: var(--primary-color);
+}
+
+
+body,
+input,
+textarea {
+  font-family: var(--subFont);
+  font-weight: 400;
+}
+
+p {
+  margin: 0;
+  margin-bottom: 0;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.page-content {
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+
+  &:hover {
+    background-color: var(--primary-color);
+    filter: brightness(0.8);
+  }
+}
+
+.dropdown-menu {
+  animation: fade-in 0.2s ease-in-out
+}
+
+.dropdown-item {
+  padding: 0.875rem;
+  color: var(--gray-2);
+  font-weight: 400;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.pagination {
+  margin: 0
+}
+
+.pagination-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  select {
+    margin-right: 12px;
+  }
+}
+
+.modal-header {
+
+  justify-content: space-between;
+
+  button {
+    background-color: transparent;
+    color: var(--gray-3);
+    font-weight: bold;
+    border: none;
+    outline: none;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

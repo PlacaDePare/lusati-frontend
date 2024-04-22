@@ -1,0 +1,65 @@
+.filter-side {
+  position: fixed;
+  background-color: var(--clear-5);
+  border-left: 1px solid var(--gray-7);
+  z-index: 1000;
+  width: 420px;
+  height: 100%;
+  min-height: 100vh;
+  right: 0;
+  top: 0;
+  padding: 12px 20px;
+
+  .filter-side-title {
+    height: 60px;
+    border-bottom: 1px solid var(--gray-7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      font-weight: bold;
+      color: var(--gray-2);
+      font-size: 14px;
+    }
+
+    button {
+      color: var(--form-control-placeholder);
+      background-color: transparent;
+      border: none;
+      transition: all 0.3s;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .filter-side-body {
+    overflow: auto;
+  }
+}
+
+
+@media only screen and (max-height: 860px) {
+  .filter-side-body {
+    max-height: 430px !important;
+    padding: 0 12px 0 0;
+  }
+}
+
+.filter-side .filter-side-body::-webkit-scrollbar {
+  width: 2px !important;
+  border-radius: 8px;
+}
+
+/* Track */
+.filter-side .filter-side-body::-webkit-scrollbar-track {
+  background: var(--subbackground-color);
+}
+
+/* Handle */
+.filter-side .filter-side-body::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #888;
+}
